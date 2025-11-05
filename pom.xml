@@ -1,0 +1,165 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.qs</groupId>
+  <artifactId>qs-toolkit</artifactId>
+  <version>0.1.0</version>
+  <packaging>pom</packaging>
+
+  <!-- Módulos hijos -->
+  <modules>
+    <module>qs-model</module>
+    <module>qs-client-jersey</module>
+    <module>qs-server-web</module>
+    <module>qs-selenide</module>
+  </modules>
+
+  <!-- ========================= -->
+  <!-- 🔧 Configuración general -->
+  <!-- ========================= -->
+  <properties>
+    <!-- Compilación base -->
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- ========================= -->
+    <!-- 🔹 Versiones principales -->
+    <!-- ========================= -->
+    <selenide.version>7.2.3</selenide.version>
+    <selenium.version>4.20.0</selenium.version>
+    <appium.version>9.3.0</appium.version>
+    <allure.version>2.25.0</allure.version>
+    <junit.jupiter.version>5.10.2</junit.jupiter.version>
+    <jersey.version>2.41</jersey.version>
+    <webdrivermanager.version>5.8.0</webdrivermanager.version>
+
+    <!-- Plugins Maven -->
+    <surefire.version>3.2.5</surefire.version>
+    <compiler.plugin.version>3.11.0</compiler.plugin.version>
+    <enforcer.version>3.4.1</enforcer.version>
+  </properties>
+
+  <!-- ============================= -->
+  <!-- 📦 Catálogo de dependencias  -->
+  <!-- ============================= -->
+  <dependencyManagement>
+    <dependencies>
+      <!-- BOM oficial de Selenium (alinea transitivos) -->
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-bom</artifactId>
+        <version>${selenium.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Selenide (web y móvil) -->
+      <dependency>
+        <groupId>com.codeborne</groupId>
+        <artifactId>selenide</artifactId>
+        <version>${selenide.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.codeborne</groupId>
+        <artifactId>selenide-appium</artifactId>
+        <version>${selenide.version}</version>
+      </dependency>
+
+      <!-- Appium -->
+      <dependency>
+        <groupId>io.appium</groupId>
+        <artifactId>java-client</artifactId>
+        <version>${appium.version}</version>
+      </dependency>
+
+      <!-- Allure -->
+      <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-junit5</artifactId>
+        <version>${allure.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-selenide</artifactId>
+        <version>${allure.version}</version>
+      </dependency>
+
+      <!-- JUnit 5 -->
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>${junit.jupiter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit.jupiter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${junit.jupiter.version}</version>
+      </dependency>
+
+      <!-- Jersey (cliente REST + JSON + multipart) -->
+      <dependency>
+        <groupId>org.glassfish.jersey.core</groupId>
+        <artifactId>jersey-client</artifactId>
+        <version>${jersey.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jersey.media</groupId>
+        <artifactId>jersey-media-json-jackson</artifactId>
+        <version>${jersey.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jersey.media</groupId>
+        <artifactId>jersey-media-multipart</artifactId>
+        <version>${jersey.version}</version>
+      </dependency>
+
+      <!-- WebDriverManager -->
+      <dependency>
+        <groupId>io.github.bonigarcia</groupId>
+        <artifactId>webdrivermanager</artifactId>
+        <version>${webdrivermanager.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!-- =================================== -->
+  <!-- ⚙️ Plugins comunes para todos los hijos -->
+  <!-- =================================== -->
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Compilador -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compiler.plugin.version}</version>
+          <configuration>
+            <release>21</release>
+          </configuration>
+        </plugin>
+
+        <!-- Ejecutor de pruebas (JUnit5) -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire.version}</version>
+        </plugin>
+
+        <!-- Enforcer: detección de conflictos -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${enforcer.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
