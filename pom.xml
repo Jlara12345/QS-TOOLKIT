@@ -163,4 +163,19 @@
       </plugins>
     </pluginManagement>
   </build>
+  
+  
+  <distributionManagement>
+  <repository>
+    <id>github</id>
+    <name>GitHub Packages</name>
+    <url>https://maven.pkg.github.com/Jlara12345/qs-toolkit</url>
+  </repository>
+  <snapshotRepository>
+    <id>github</id>
+    <name>GitHub Packages</name>
+    <url>https://maven.pkg.github.com/Jlara12345/qs-toolkit</url>
+  </snapshotRepository>
+</distributionManagement>
+
 </project>

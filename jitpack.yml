@@ -1,18 +1,4 @@
 jdk:
   - openjdk21
-
 install:
-  - |
-    mvn -q -DskipTests -DskipITs \
-        -pl qs-model,qs-client-jersey,qs-selenide,qs-server-web \
-        -am clean install
-
-artifacts:
-  - path: qs-model/target/qs-model-*.jar
-    type: jar
-  - path: qs-client-jersey/target/qs-client-jersey-*.jar
-    type: jar
-  - path: qs-selenide/target/qs-selenide-*.jar
-    type: jar
-  - path: qs-server-web/target/qs-server-web-*.jar
-    type: jar
+  - mvn -q -DskipTests -DskipITs clean install
